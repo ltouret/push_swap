@@ -12,5 +12,6 @@ typedef struct s_list
 }				t_list;
 
 void	*mymalloc(size_t size);
+int		ft_atoi(const char *str);
 
 #endif

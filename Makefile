@@ -6,13 +6,13 @@
 #    By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:00:20 by ltouret           #+#    #+#              #
-#    Updated: 2021/09/21 02:44:27 by ltouret          ###   ########.fr        #
+#    Updated: 2021/09/21 15:45:02 by ltouret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRCS = main.c utils.c
+SRCS = main.c utils.c ft_atoi.c
 
 OBJS = ${SRCS:.c=.o}
 

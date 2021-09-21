@@ -61,6 +61,9 @@ void	check_args(int argc, char *argv[])
 	while (i < argc)
 	{
 		o = 0;
+		//printf(" %s\n", argv[i]);
+		if (argv[i] != NULL && argv[i][o] == '\0')
+			exit (1); // error wrong arg, no num
 		while (argv[i] != NULL && argv[i][o])
 		{
 			if (!(argv[i][o] >= '0' && argv[i][o] <= '9'))
@@ -71,18 +74,54 @@ void	check_args(int argc, char *argv[])
 	}
 }
 
-void	parsing(int argc, char *argv[])
+void	add_num(int argc, char *argv[], t_list **data)
+{
+	int		i;
+	int		*r;
+	t_list	*new;
+
+	i = 1;
+	r = 0;
+	while (i < argc)
+	{
+		r = mymalloc(sizeof(int));
+		*r = ft_atoi(argv[i]);
+		new = lst_new(r);
+		lst_add_back(data, new);
+		//printf("%p %d\n", r, *(int *)(*data)->content);
+		i++;
+	}
+	// POC of how to free a linked list?
+	i = 1;
+	new = *data;
+	while (i < argc)
+	{
+		free(new->content);
+		new->content = NULL;
+		new = new->next;
+		i++;
+	}
+}
+
+void	parsing(int argc, char *argv[], t_list **data)
 {
 	// TODO check empty string received
 	// check duplicates
 	// every string reecived must be num
+	// check MAX_INT < num || MIN_INT < num
 	check_args(argc, argv);
+	add_num(argc, argv, data);
 }
 
 int	main(int argc, char *argv[])
 {
-	parsing(argc, argv);
+	t_list *data;
 
+	data = NULL;
+	parsing(argc, argv, &data);
+	//printf(" %d\n", *(int *)data->next->content);
+
+	/*
 	t_list *new = lst_new("hello");
 	t_list *new1 = lst_new("well");
 	t_list *new2 = lst_new("bye");
@@ -95,5 +134,6 @@ int	main(int argc, char *argv[])
 	printf(" %s\n", (char *)curr->content);
 	//curr = curr->next;
 	//printf(" %s\n", (char *)curr->content);
+	*/
 	return (0);
 }

@@ -1,5 +1,3 @@
-// TODO create .h
-
 #include "push_swap.h"
 
 t_list	*lst_new(void *content)
@@ -94,11 +92,15 @@ void	add_num(int argc, char *argv[], t_list **data)
 	// POC of how to free a linked list?
 	i = 1;
 	new = *data;
+	t_list *curr = *data;
 	while (i < argc)
 	{
+		curr = new;
 		free(new->content);
 		new->content = NULL;
 		new = new->next;
+		curr->next = NULL;
+		free(curr);
 		i++;
 	}
 }
@@ -107,7 +109,7 @@ void	parsing(int argc, char *argv[], t_list **data)
 {
 	// TODO check empty string received
 	// check duplicates
-	// every string reecived must be num
+	// every string received must be num
 	// check MAX_INT < num || MIN_INT < num
 	check_args(argc, argv);
 	add_num(argc, argv, data);

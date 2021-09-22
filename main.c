@@ -148,6 +148,7 @@ void	check_unique_num(t_data *data)
 		while (o)
 		{
 			//debug("a");
+			//debug("a");
 			if (*(int *)i->content == *(int *)o->content)
 			{
 				debug("DED");

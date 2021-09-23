@@ -5,18 +5,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef enum e_error
-{
-	ERR = 1,
-	OK = 0,
-	ERR_MALLOC,
-	ERR_DUPLICATES,
-	ERR_ARG_WCHAR,
-	ERR_ARG_EMPTY,
-	ERR_ARG,
-	ERR_NO_INT
-}					t_error;
-
 typedef struct s_list
 {
 	void			*content;
@@ -39,9 +27,11 @@ typedef struct s_data
 	long			alen;
 }					t_data;
 
-void	panic(t_error err_code);
+void	panic(void);
 void	*mymalloc(size_t size);
 void	ft_bzero(void *s, size_t n);
-int		ft_atoi(const char *str);
+long	ft_atol(const char *str);
+
+//void	free_stack(t_data *data);
 
 #endif

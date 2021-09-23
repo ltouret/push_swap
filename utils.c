@@ -18,7 +18,7 @@ void	*mymalloc(size_t size)
 
 	out = malloc(size);
 	if (out == NULL)
-		panic(ERR_MALLOC);
+		panic();
 	ft_bzero(out, size);
 	return (out);
 }

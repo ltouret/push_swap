@@ -1,6 +1,7 @@
 #include "push_swap.h"
 
 void	debug(char *str)
+//erase this func
 {
 	int	i;
 
@@ -72,22 +73,23 @@ t_list	*lst_pop(t_list **lst)
 }
 
 void	check_args(int argc, char *argv[])
+// TODO deal with negatives and maybe if i add + -
 {
 	int	i;
 	int	o;
 
 	if (argc < 2)
-		panic(ERR_ARG);
+		panic();
 	i = 1;
 	while (i < argc)
 	{
 		o = 0;
 		if (argv[i] != NULL && argv[i][o] == '\0')
-			panic(ERR_ARG_EMPTY);
+			panic();
 		while (argv[i] != NULL && argv[i][o])
 		{
 			if (!(argv[i][o] >= '0' && argv[i][o] <= '9'))
-				panic(ERR_ARG_WCHAR);
+				panic();
 			o++;
 		}
 		i++;
@@ -128,25 +130,26 @@ void	add_num(int argc, char *argv[], t_data *data)
 {
 	int		i;
 	int		*r;
+	long	max;
+	long	min;
 	t_list	*new;
 
 	i = 1;
-	r = 0;
+	max = 2147483647;
+	min = -2147483648;
 	while (i < argc)
 	{
+		if (ft_atol(argv[i]) > max || ft_atol(argv[i]) < min)
+		{
+			free_stack(data);
+			panic();
+		}
 		r = mymalloc(sizeof(int));
-		*r = ft_atoi(argv[i]);
+		*r = ft_atol(argv[i]);
 		new = lst_new(r);
 		lst_add_back(&data->stkA.lst, new);
-		//printf("%p %d\n", r, *(int *)data->stkA.lst->content);
-		//printf("%p %d\n", r, *(int *)new->content);
 		i++;
 	}
-	data->alen = argc - 1;
-	data->stkA.rlen = argc - 1;
-	data->stkB.rlen = 0;
-	data->stkA.id = 'a';
-	data->stkB.id = 'b';
 }
 
 void	check_unique_num(t_data *data)
@@ -163,7 +166,7 @@ void	check_unique_num(t_data *data)
 			if (*(int *)i->content == *(int *)o->content)
 			{
 				free_stack(data);
-				panic(ERR_DUPLICATES);
+				panic();
 			}
 			o = o->next;
 		}
@@ -174,15 +177,25 @@ void	check_unique_num(t_data *data)
 void	parsing(int argc, char *argv[], t_data *data)
 {
 	// TODO
+	// Check if the numbers in stkA are all sorted at the start!.
+	// deal with negatives and maybe if i add + -
 	// check if not enough numbers! like what if i have 1 or 2 nums?
-	// check MAX_INT < num || MIN_INT > num
+	debug("1");
 	check_args(argc, argv);
+	debug("2");
 	add_num(argc, argv, data);
 	check_unique_num(data); // this breaks if  0 < alen < 2
+	// create init func for this?
+	data->alen = argc - 1;
+	data->stkA.rlen = argc - 1;
+	data->stkB.rlen = 0;
+	data->stkA.id = 'a';
+	data->stkB.id = 'b';
 }
 
 void	show_stack(t_stack *stack)
 {
+	//erase this func
 	t_list *current;
 
 	current = stack->lst;
@@ -195,7 +208,6 @@ void	show_stack(t_stack *stack)
 }
 
 //operations coding
-// TODO print each opetarion once done!
 
 void	swap(t_stack *stack, int print)
 {
@@ -305,43 +317,12 @@ int	main(int argc, char *argv[])
 // TODO Should consider add data backwards to have a real stack... now im the one thinking backwards
 {
 	t_data	data;
+
 	ft_bzero(&data, sizeof(t_data));
-
 	parsing(argc, argv, &data);
-	//printf("alen %ld rlen %ld\n", data.alen, data.stkA.rlen);
+
 	//show_stack(&data.stkA);
-
-	//operations coding
-
-	int i = 5;
-	while (i < 10)
-	{
-		int *r = mymalloc(sizeof(int));
-		*r = i;
-		lst_add_back(&data.stkB.lst, lst_new(r));
-		data.stkB.rlen++;
-		i++;
-	}
-	show_stack(&data.stkA);
-	show_stack(&data.stkB);
-	rrev_rotate(&data.stkA, &data.stkB);
-	rrotate(&data.stkA, &data.stkB);
-	sswap(&data.stkA, &data.stkB);
-	show_stack(&data.stkA);
-	show_stack(&data.stkB);
-	/*
-	show_stack(&data.stkB);
-	swap(&data.stkB);
-	debug("\n");
-	show_stack(&data.stkB);
-	show_stack(&data.stkB);
-	rotate(&data.stkB);
-	debug("\n");
-	show_stack(&data.stkB);
-	debug("\n");
-	rev_rotate(&data.stkB);
-	show_stack(&data.stkB);
-	*/
+	//printf("alen %ld rlen %ld\n", data.alen, data.stkA.rlen);
 
 	free_stack(&data);
 	return (0);

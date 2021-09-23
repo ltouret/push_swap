@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:43:28 by ltouret           #+#    #+#             */
-/*   Updated: 2021/09/21 15:48:01 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/09/24 00:34:52 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
+long	ft_atol(const char *str)
 {
 	int		sign;
-	int		result;
+	long	result;
 	int		i;
 
 	result = 0;
@@ -37,6 +37,7 @@ int	ft_atoi(const char *str)
 	result *= sign;
 	return (result);
 }
+
 /*
 **#include <stdio.h>
 **

@@ -43,36 +43,31 @@ void	lst_add_back(t_list **lst, t_list *new)
 t_list	*lst_pop(t_list **lst)
 // return content most likely!
 // test this more...
-// if len(lst) > 1 then this breaks!
-// porblem with pointers, needs to change if returning n
-// n - 1 next needs to be set to NULL
 {
 	int		i;
 	t_list	*last;
+	t_list	*pen;
 
 	if (*lst == NULL)
 		return (NULL);
 	last = *lst;
+	i = 0;
 	while (last->next)
 	{
 		last = last->next;
 		i++;
 	}
-	//printf("%d %d\n", *(int *)last->content, i);
-	last = *lst;
+	pen = *lst;
 	while (i - 1 > 0)
-	// TODO esto da el penultimo elemento... no last
 	{
-		last = last->next;
+		pen = pen->next;
 		i--;
 	}
 	if (i == 0)
 		*lst = NULL;
-	// else penultimo (n - 1) ->next == NULL;
-	//else
-	//printf("%d\n", *(int *)last->content);
-	//last->next = NULL;
-	//printf("%p %p\n", lst, last); //TODO check this when fixing this, len(lst) == 1 then last == lst so free problems!
+	else
+		pen->next = NULL;
+	//printf("%d %d %d\n", *(int *)last->content, *(int *)pen->content, i);
 	return (last);
 }
 
@@ -122,7 +117,7 @@ void	free_stack(t_data *data)
 	{
 		erase = next;
 		//printf("%d\n", *(int *)next->content);
-		debug("X"); // pop prob even does stuff here why ?
+		//debug("X"); // pop prob even does stuff here why ?
 		free(erase->content);
 		next = next->next;
 		free(erase);
@@ -149,6 +144,9 @@ void	add_num(int argc, char *argv[], t_data *data)
 	}
 	data->alen = argc - 1;
 	data->stkA.rlen = argc - 1;
+	data->stkB.rlen = 0;
+	data->stkA.id = 'a';
+	data->stkB.id = 'b';
 }
 
 void	check_unique_num(t_data *data)
@@ -190,65 +188,160 @@ void	show_stack(t_stack *stack)
 	current = stack->lst;
 	while (current)
 	{
-		printf("%d\n", *(int *)current->content);
+		printf("%d ", *(int *)current->content);
 		current = current->next;
 	}
+	printf("\nrlen: %ld\n", stack->rlen);
 }
 
 //operations coding
+// TODO print each opetarion once done!
 
-void	swap(t_stack *stack)
+void	swap(t_stack *stack, int print)
 {
-	void	*first;
-	void	*second;
+	t_list	*newpen;
+	t_list	*newlast;
+	t_list	*tmp;
 
 	if (stack->rlen < 2)
 		return ;
-	first = stack->lst->content;
-	second = stack->lst->next->content;
-	stack->lst->content = second;
-	stack->lst->next->content = first;
-	show_stack(stack);
+	newpen = lst_pop(&stack->lst);
+	newlast = lst_pop(&stack->lst);
+	tmp = stack->lst;
+	//show_stack(stack);
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = newpen;
+	newpen->next = newlast;
+	if (print == 0)
+		return ;
+	write(1, "s", 1);
+	write(1, &stack->id, 1);
+	write(1, "\n", 1);
 }
 
 void	sswap(t_stack *stack_a, t_stack *stack_b)
 // If theres only in one stack should you stop
 {
-	swap(stack_a);
-	swap(stack_b);
+	swap(stack_a, 0);
+	swap(stack_b, 0);
+	write(1, "ss\n", 3);
 }
 
-void	push(t_stack *stack_a, t_stack *stack_b)
+void	push(t_stack *dest, t_stack *src)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
-	if (stack_b->rlen == 0)
+	if (src->rlen == 0)
 		return ;
-	// prob with pop lul
-	tmp = lst_pop(&stack_b->lst);
-	lst_add_back(&stack_a->lst, tmp);
-	stack_a->rlen++;
-	show_stack(stack_a);
+	tmp = lst_pop(&src->lst);
+	lst_add_back(&dest->lst, tmp);
+	dest->rlen++;
+	src->rlen--;
+	//show_stack(dest);
+	write(1, "p", 1);
+	write(1, &dest->id, 1);
+	write(1, "\n", 1);
+}
+
+void	rotate(t_stack *stack, int print)
+// if len < 2 this breaks!
+{
+	t_list	*newlast;
+	t_list	*tmp;
+
+	if (stack->rlen < 2)
+		return ;
+	newlast = stack->lst;
+	tmp = stack->lst;
+	stack->lst = stack->lst->next;
+	while (tmp->next)
+		tmp = tmp->next;
+
+	//printf("%d %d\n", *(int *)tmp->content, *(int *)stack->lst->content);
+	tmp->next = newlast;
+	newlast->next = NULL;
+	if (print == 0)
+		return ;
+	write(1, "r", 1);
+	write(1, &stack->id, 1);
+	write(1, "\n", 1);
+}
+
+void	rrotate(t_stack *stack_a, t_stack *stack_b)
+// If theres only in one stack should you stop
+{
+	rotate(stack_a, 0);
+	rotate(stack_b, 0);
+	write(1, "rr\n", 3);
+}
+
+void	rev_rotate(t_stack *stack, int print)
+{
+	t_list	*newfirst;
+
+	if (stack->rlen < 2)
+		return ;
+	newfirst = lst_pop(&stack->lst);
+	newfirst->next = stack->lst;
+	stack->lst = newfirst;
+	//printf("%d\n", *(int *)newfirst->content);
+	if (print == 0)
+		return ;
+	write(1, "rr", 2);
+	write(1, &stack->id, 1);
+	write(1, "\n", 1);
+}
+
+void	rrev_rotate(t_stack *stack_a, t_stack *stack_b)
+// If theres only in one stack should you stop
+{
+	rev_rotate(stack_a, 0);
+	rev_rotate(stack_b, 0);
+	write(1, "rrr\n", 4);
 }
 
 int	main(int argc, char *argv[])
+// TODO Should consider add data backwards to have a real stack... now im the one thinking backwards
 {
 	t_data	data;
 	ft_bzero(&data, sizeof(t_data));
 
 	parsing(argc, argv, &data);
-	printf("alen %ld rlen %ld\n", data.alen, data.stkA.rlen);
+	//printf("alen %ld rlen %ld\n", data.alen, data.stkA.rlen);
 	//show_stack(&data.stkA);
 
 	//operations coding
-	//swap(&data.stkA);
-	int *r = mymalloc(sizeof(int));
-	*r = 10;
-	data.stkB.lst = lst_new(r);
-	data.stkB.rlen++;
-	//printf("%d %ld\n", *(int *)data.stkB.lst->content, data.stkB.rlen);
-	//sswap(&data.stkA, &data.stkB);
-	push(&data.stkA, &data.stkB);
+
+	int i = 5;
+	while (i < 10)
+	{
+		int *r = mymalloc(sizeof(int));
+		*r = i;
+		lst_add_back(&data.stkB.lst, lst_new(r));
+		data.stkB.rlen++;
+		i++;
+	}
+	show_stack(&data.stkA);
+	show_stack(&data.stkB);
+	rrev_rotate(&data.stkA, &data.stkB);
+	rrotate(&data.stkA, &data.stkB);
+	sswap(&data.stkA, &data.stkB);
+	show_stack(&data.stkA);
+	show_stack(&data.stkB);
+	/*
+	show_stack(&data.stkB);
+	swap(&data.stkB);
+	debug("\n");
+	show_stack(&data.stkB);
+	show_stack(&data.stkB);
+	rotate(&data.stkB);
+	debug("\n");
+	show_stack(&data.stkB);
+	debug("\n");
+	rev_rotate(&data.stkB);
+	show_stack(&data.stkB);
+	*/
 
 	free_stack(&data);
 	return (0);

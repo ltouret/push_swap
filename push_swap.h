@@ -28,6 +28,7 @@ typedef struct s_stack
 {
 	t_list			*lst;
 	long			rlen;
+	char			id;
 }					t_stack;
 
 typedef struct s_data

@@ -8,7 +8,8 @@ int	main(int argc, char *argv[])
 	ft_bzero(&data, sizeof(t_data));
 	parsing(argc, argv, &data);
 
-	//show_stack(&data.stkA);
+	debug("showin stack\n");
+	show_stack(&data.stkA);
 	//printf("alen %ld rlen %ld\n", data.alen, data.stkA.rlen);
 
 	free_stack(&data);

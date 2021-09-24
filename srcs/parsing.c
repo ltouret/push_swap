@@ -1,26 +1,34 @@
 #include "push_swap.h"
 
+#define MAX 2147483647
+#define MIN -2147483648
+
 static void	check_args(int argc, char *argv[])
-// TODO deal with negatives and maybe if i add + -
+// TODO 1+0 10-4 breaks this code!
 {
 	int	i;
 	int	o;
+	int	sign;
 
-	if (argc < 2)
-		panic();
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
 		o = 0;
+		sign = 0;
 		if (argv[i] != NULL && argv[i][o] == '\0')
 			panic();
 		while (argv[i] != NULL && argv[i][o])
 		{
-			if (!(argv[i][o] >= '0' && argv[i][o] <= '9'))
+			while (argv[i][o] == '-' || argv[i][o] == '+')
+			{
+				sign++;
+				o++;
+				//printf("%d %d %d\n", i, sign, o);
+			}
+			if (!(argv[i][o] >= '0' && argv[i][o] <= '9') || sign > 1)
 				panic();
 			o++;
 		}
-		i++;
 	}
 }
 
@@ -28,16 +36,12 @@ static void	add_num(int argc, char *argv[], t_data *data)
 {
 	int		i;
 	int		*r;
-	long	max;
-	long	min;
 	t_list	*new;
 
 	i = 1;
-	max = 2147483647;
-	min = -2147483648;
 	while (i < argc)
 	{
-		if (ft_atol(argv[i]) > max || ft_atol(argv[i]) < min)
+		if (ft_atol(argv[i]) > MAX || ft_atol(argv[i]) < MIN)
 		{
 			free_stack(data);
 			panic();
@@ -72,19 +76,47 @@ static void	check_unique_num(t_data *data)
 	}
 }
 
+static int	check_sorted(t_data *data)
+{
+	t_list	*current;
+	t_list	*current_p;
+
+	if (data->alen == 1)
+		return (0);
+	current = data->stkA.lst;
+	current_p = current->next;
+	while (current_p)
+	{
+		if (*(int *)current_p->content < *(int *)current->content)
+			return (1);
+		current_p = current_p->next;
+		current = current->next;
+	}
+	return (0);
+}
+
 void	parsing(int argc, char *argv[], t_data *data)
 {
 	// TODO
 	// Check if the numbers in stkA are all sorted at the start!.
 	// deal with negatives and maybe if i add + -
 	// check if not enough numbers! like what if i have 1 or 2 nums?
+	if (argc < 2)
+		panic();
 	check_args(argc, argv);
 	add_num(argc, argv, data);
 	check_unique_num(data); // this breaks if  0 < alen < 2
-	// create init func for this?
 	data->alen = argc - 1;
 	data->stkA.rlen = argc - 1;
 	data->stkB.rlen = 0;
 	data->stkA.id = 'a';
 	data->stkB.id = 'b';
+	if (check_sorted(data) == 0)
+	{
+		// erase
+		debug("its already sorted\n");
+		free_stack(data);
+		exit(0);
+	}
+	// create init func for this?
 }

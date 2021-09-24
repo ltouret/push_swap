@@ -6,7 +6,7 @@
 #    By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:00:20 by ltouret           #+#    #+#              #
-#    Updated: 2021/09/24 17:35:10 by ltouret          ###   ########.fr        #
+#    Updated: 2021/09/25 01:07:39 by ltouret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +37,12 @@ clean:
 		${RM} ${OBJS}
 
 fclean:	clean
-		#make -C libft/ fclean
 		${RM} ${NAME}
 
 re:		fclean all
 
 test:	all
 		./push_swap 7 6 3 4 -19 2
+		#./push_swap 1+0 # this breaks!
 
 .PHONY: all clean fclean re test

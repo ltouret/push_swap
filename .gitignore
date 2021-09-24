@@ -1,6 +1,7 @@
 # Custom
 *.swp
 *.png
+*.html
 *.pdf
 push_swap
 

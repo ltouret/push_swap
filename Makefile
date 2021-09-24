@@ -6,13 +6,15 @@
 #    By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:00:20 by ltouret           #+#    #+#              #
-#    Updated: 2021/09/24 00:39:50 by ltouret          ###   ########.fr        #
+#    Updated: 2021/09/24 17:35:10 by ltouret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRCS = main.c utils.c ft_atol.c error.c
+SRCS = srcs/main.c srcs/utils.c srcs/exit.c srcs/lst_func.c \
+	srcs/parsing.c srcs/operations1.c srcs/operations2.c\
+	srcs/erase.c #TODO erase
 
 OBJS = ${SRCS:.c=.o}
 
@@ -41,6 +43,6 @@ fclean:	clean
 re:		fclean all
 
 test:	all
-		./push_swap 7 6 3 4 19 2
+		./push_swap 7 6 3 4 -19 2
 
 .PHONY: all clean fclean re test

@@ -1,21 +1,27 @@
 #include "push_swap.h"
 
+// TODO swap and push are wrong... should change:
+// swap : two FIRST elems
+// push : take last from b and push on top of a
+// push : take last from a and push on top of b
+
 void	swap(t_stack *stack, int print)
 {
 	t_list	*newpen;
-	t_list	*newlast;
 	t_list	*tmp;
+	void	*vtmp;
 
 	if (stack->rlen < 2)
 		return ;
 	newpen = lst_pop(&stack->lst);
-	newlast = lst_pop(&stack->lst);
 	tmp = stack->lst;
 	//show_stack(stack);
-	while (tmp->next)
+	while (tmp && tmp->next) // maybe this protection is bad?
 		tmp = tmp->next;
+	vtmp = tmp->content;
+	tmp->content = newpen->content;
+	newpen->content = vtmp;
 	tmp->next = newpen;
-	newpen->next = newlast;
 	if (print == 0)
 		return ;
 	write(1, "s", 1);

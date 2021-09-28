@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/28 12:49:33 by ltouret           #+#    #+#             */
+/*   Updated: 2021/09/28 13:09:40 by ltouret          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 #define MAX 2147483647
 #define MIN -2147483648
 
 static void	check_args(int argc, char *argv[])
-// TODO 1+0 10-4 breaks this code!
+// TODO add spaces? "1 3 4 32" gives errpr and it shouldnt
 {
 	int	i;
 	int	o;
@@ -17,18 +29,15 @@ static void	check_args(int argc, char *argv[])
 		sign = 0;
 		if (argv[i] != NULL && argv[i][o] == '\0')
 			panic();
-		while (argv[i] != NULL && argv[i][o])
+		while (argv[i][o] && (argv[i][o] == '-' || argv[i][o] == '+'))
 		{
-			while (argv[i][o] == '-' || argv[i][o] == '+')
-			{
-				sign++;
-				o++;
-				//printf("%d %d %d\n", i, sign, o);
-			}
-			if (!(argv[i][o] >= '0' && argv[i][o] <= '9') || sign > 1)
-				panic();
+			sign++;
 			o++;
 		}
+		while (argv[i][o] && argv[i][o] >= '0' && argv[i][o] <= '9')
+			o++;
+		if (argv[i][o] != '\0' || sign > 1)
+			panic();
 	}
 }
 
@@ -98,8 +107,6 @@ static int	check_sorted(t_data *data)
 void	parsing(int argc, char *argv[], t_data *data)
 {
 	// TODO
-	// Check if the numbers in stkA are all sorted at the start!.
-	// deal with negatives and maybe if i add + -
 	// check if not enough numbers! like what if i have 1 or 2 nums?
 	if (argc < 2)
 		panic();

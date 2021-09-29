@@ -6,7 +6,7 @@
 #    By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:00:20 by ltouret           #+#    #+#              #
-#    Updated: 2021/09/28 20:20:32 by ltouret          ###   ########.fr        #
+#    Updated: 2021/09/30 01:18:07 by ltouret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ re:		fclean all
 
 test:	all
 		@#./push_swap 7 6 3 4 -19 2
-		./push_swap 3 2 1
+		@#./push_swap 3 2 5 1
+		./push_swap 3 2 1 5 7
 		@#./push_swap 7 6
 		@#./push_swap +171 -13 148 #this breaks!
 

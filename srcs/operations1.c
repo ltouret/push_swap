@@ -1,27 +1,18 @@
 #include "push_swap.h"
 
-// TODO swap and push are wrong... should change:
-// swap : two FIRST elems
-// push : take last from b and push on top of a
-// push : take last from a and push on top of b
+// TODO should add a define PRI == 1 // HID == 0 to print or not
 
 void	swap(t_stack *stack, int print)
 {
-	t_list	*newpen;
 	t_list	*tmp;
 	void	*vtmp;
 
 	if (stack->rlen < 2)
 		return ;
-	newpen = lst_pop(&stack->lst);
-	tmp = stack->lst;
-	//show_stack(stack);
-	while (tmp && tmp->next) // maybe this protection is bad?
-		tmp = tmp->next;
+	tmp = stack->lst->next;
 	vtmp = tmp->content;
-	tmp->content = newpen->content;
-	newpen->content = vtmp;
-	tmp->next = newpen;
+	tmp->content = stack->lst->content;
+	stack->lst->content = vtmp;
 	if (print == 0)
 		return ;
 	write(1, "s", 1);
@@ -38,16 +29,19 @@ void	sswap(t_stack *stack_a, t_stack *stack_b)
 }
 
 void	push(t_stack *dest, t_stack *src)
+// test this more... maye it breaks
 {
 	t_list	*tmp;
 
 	if (src->rlen == 0)
 		return ;
-	tmp = lst_pop(&src->lst);
-	lst_add_back(&dest->lst, tmp);
+	tmp = src->lst;
+	src->lst = src->lst->next;
+	tmp->next = dest->lst;
+	dest->lst = tmp;
+	//lst_add_back(&dest->lst, tmp);
 	dest->rlen++;
 	src->rlen--;
-	//show_stack(dest);
 	write(1, "p", 1);
 	write(1, &dest->id, 1);
 	write(1, "\n", 1);

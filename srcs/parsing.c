@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:49:33 by ltouret           #+#    #+#             */
-/*   Updated: 2021/09/28 13:09:40 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/09/29 23:55:40 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	parsing(int argc, char *argv[], t_data *data)
 	// TODO
 	// check if not enough numbers! like what if i have 1 or 2 nums?
 	if (argc < 2)
-		panic();
+		exit (0);
 	check_args(argc, argv);
 	add_num(argc, argv, data);
 	check_unique_num(data); // this breaks if  0 < alen < 2

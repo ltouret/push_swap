@@ -10,6 +10,7 @@ void	free_stack(t_data *data)
 {
 	// call this when done too free all!
 	// TODO add NULLs so no double free :D
+	// should call exit here by default?
 	t_list *erase;
 	t_list *next;
 

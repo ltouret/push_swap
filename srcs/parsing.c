@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:49:33 by ltouret           #+#    #+#             */
-/*   Updated: 2021/09/29 23:55:40 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/09/30 16:02:42 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,41 @@ static int	check_sorted(t_data *data)
 	return (0);
 }
 
+void	replace_num(t_data *data)
+{
+	int	*arr;
+	int	i;
+	t_list	*tmp;
+
+	arr = mymalloc(sizeof(int) * (data->alen));
+	tmp = data->stkA.lst;
+	i = 0;
+	while (tmp)
+	{
+		arr[i] = *(int *)tmp->content;
+		tmp = tmp->next;
+		//printf("%d\n", arr[i]);
+		i++;
+	}
+}
+
 void	parsing(int argc, char *argv[], t_data *data)
 {
 	// TODO
 	// check if not enough numbers! like what if i have 1 or 2 nums?
 	if (argc < 2)
 		exit (0);
-	check_args(argc, argv);
-	add_num(argc, argv, data);
-	check_unique_num(data); // this breaks if  0 < alen < 2
+	// create init func for this?
 	data->alen = argc - 1;
 	data->stkA.rlen = argc - 1;
 	data->stkB.rlen = 0;
 	data->stkA.id = 'a';
 	data->stkB.id = 'b';
+
+	check_args(argc, argv);
+	add_num(argc, argv, data);
+	replace_num(data);
+	check_unique_num(data); // this breaks if  0 < alen < 2
 	if (check_sorted(data) == 0)
 	{
 		// erase
@@ -125,5 +146,4 @@ void	parsing(int argc, char *argv[], t_data *data)
 		free_stack(data);
 		exit(0);
 	}
-	// create init func for this?
 }

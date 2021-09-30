@@ -27,7 +27,6 @@ void	sort_three(t_data *data)
 	if (a < b && b < c && c > a)
 	{
 		rotate(&data->stkA, 1);
-		show_stack(&data->stkA);
 		swap(&data->stkA, 1);
 	}
 	if (a > b && b < c && c < a)

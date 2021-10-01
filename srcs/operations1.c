@@ -39,6 +39,7 @@ void	push(t_stack *dest, t_stack *src)
 	src->lst = src->lst->next;
 	tmp->next = dest->lst;
 	dest->lst = tmp;
+	//printf("%d\n", *(int *)src->lst->next->content);
 	//lst_add_back(&dest->lst, tmp);
 	dest->rlen++;
 	src->rlen--;

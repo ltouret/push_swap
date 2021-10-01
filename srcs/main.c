@@ -99,6 +99,99 @@ void	sort_five(t_data *data)
 	push(&data->stkA, &data->stkB);
 }
 
+void printBits(unsigned int num)
+{
+	int	bit;
+
+	if (num > 65535)
+		bit = (sizeof(int) * 8) - 1;
+	else
+		bit = (sizeof(short) * 8) - 1;
+	printf("num %i bit:", num);
+	for(; bit >= 0; bit--)
+	{
+		if ((bit + 1) % 8 == 0)
+			printf(" ");
+		printf("%i", (num >> bit) & 0x01);
+	}
+	printf("\n");
+}
+
+int	b_len(int len)
+// if i want i can optimize this if len > 65535 then bit = (sizeof(short) * 8) - 1
+{
+	int	b;
+	int	bit;
+
+	b = 0;
+	if (len > 65535)
+		bit = (sizeof(int) * 8) - 1;
+	else
+		bit = (sizeof(short) * 8) - 1;
+	while (bit >= 0)
+	{
+		// this gives max len! number if times i need to iterate
+		if (((len >> bit) & 1) == 1)
+		{
+			b = bit;
+			break;
+		}
+		bit--;
+	}
+	return (b);
+}
+
+void	sort_big(t_data *data)
+{
+	int	bit_len;
+	int	i;
+	int	num;
+	t_list	*tmp;
+
+	bit_len = b_len(data->alen - 1) + 1;
+	int max_bits = 0; // how many bits for max_num while ((max_num >> max_bits) != 0) ++max_bits;
+	while ((6 >> max_bits) != 0) ++max_bits;
+	printf("maa %d\n", max_bits);
+	//printf("%d\n", bit_len);
+	//printBits(32767);
+	i = 0;
+	// erase after
+	tmp = data->stkA.lst;
+	while (tmp)
+	{
+		printBits(*(unsigned int *)tmp->content);
+		tmp = tmp->next;
+	}
+	printf("\n");
+//	while (i < bit_len)
+	{
+		tmp = data->stkA.lst;
+		while (tmp)
+		{
+			num = *(int *)tmp->content;
+			printBits(*(unsigned int *)tmp->content);
+			//printf("%d\n", ((num >> i) & 1));
+			if (((num >> i) & 1) == 1)
+			{
+				rotate(&data->stkA, 1);
+			}
+			else
+			{
+				push(&data->stkB, &data->stkA);
+				tmp = data->stkA.lst;
+				continue;
+			}
+			printf(" %d ", *(int *)tmp->content);
+			//printf("%p %p", data->stkB.lst, tmp);
+			tmp = tmp->next;
+			printf(" %s ", (char *)tmp);
+			//debug("A");
+		}
+		printf("\n");
+		i++;
+	}
+}
+
 void	sort(t_data *data)
 // careful if sort gets called with alen == 1 this would break
 // for now if alen == 1 then already sorted is called and program exits well
@@ -112,10 +205,8 @@ void	sort(t_data *data)
 		sort_three(data);
 	else if (len <= 5)
 		sort_five(data);
-	/*
 	else if (len > 5)
-		sort_big(data)
-	*/
+		sort_big(data);
 }
 
 int	main(int argc, char *argv[])
@@ -127,10 +218,10 @@ int	main(int argc, char *argv[])
 	parsing(argc, argv, &data);
 
 	//debug("showin stack\n");
-	//show_stack(&data.stkA);
+	show_stack(&data.stkA);
 	sort(&data);
 	//debug("after sort\n");
-	//show_stack(&data.stkA);
+	show_stack(&data.stkA);
 
 	//printf("alen %ld rlen %ld\n", data.alen, data.stkA.rlen);
 	free_stack(&data);

@@ -6,7 +6,7 @@
 #    By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:00:20 by ltouret           #+#    #+#              #
-#    Updated: 2021/09/30 01:18:07 by ltouret          ###   ########.fr        #
+#    Updated: 2021/10/01 16:59:42 by ltouret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS = srcs/main.c srcs/utils.c srcs/exit.c srcs/lst_func.c \
 
 OBJS = ${SRCS:.c=.o}
 
-CC		= gcc
+CC		= clang
 RM		= rm -f
 
 CFLAGS = -Wall -Wextra -Werror
@@ -42,10 +42,11 @@ fclean:	clean
 re:		fclean all
 
 test:	all
-		@#./push_swap 7 6 3 4 -19 2
+		@#./push_swap 7 6 3 4 -19 2 123
 		@#./push_swap 3 2 5 1
-		./push_swap 3 2 1 5 7
+		@#./push_swap 3 2 1 5 7
 		@#./push_swap 7 6
+		./push_swap 87 -487 781 -100 101 0 1
 		@#./push_swap +171 -13 148 #this breaks!
 
 .PHONY: all clean fclean re test

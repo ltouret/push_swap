@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:49:33 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/01 13:15:31 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:39:00 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,44 +85,41 @@ static void	check_unique_num(t_data *data)
 	}
 }
 
-static int	check_sorted(t_data *data)
+static void	check_sorted(t_data *data)
 {
 	t_list	*current;
 	t_list	*current_p;
 
 	if (data->alen == 1)
-		return (0);
+	{
+		// erase me
+		debug("its already sorted\n");
+		free_stack(data);
+		exit(0);
+	}
 	current = data->stkA.lst;
 	current_p = current->next;
 	while (current_p)
 	{
+		//printf("%d %d\n", *(int *)current_p->content, *(int *)current->content);
 		if (*(int *)current_p->content < *(int *)current->content)
-			return (1);
+			return ;
 		current_p = current_p->next;
 		current = current->next;
 	}
-	return (0);
+	// erase me
+	debug("its already sorted\n");
+	free_stack(data);
+	exit(0);
+	return ;
 }
 
-//void	replace_num1(t_data *data)
-
-void	replace_num(t_data *data)
+void	replace_num1(t_data *data, int *arr)
 {
-	int	*arr;
 	int	i;
 	int	o;
 	int	itmp;
-	t_list	*tmp;
 
-	arr = mymalloc(sizeof(int) * (data->alen));
-	tmp = data->stkA.lst;
-	i = 0;
-	while (tmp)
-	{
-		arr[i] = *(int *)tmp->content;
-		tmp = tmp->next;
-		i++;
-	}
 	i = 0;
 	itmp = 0;
 	while (i < data->alen)
@@ -140,6 +137,13 @@ void	replace_num(t_data *data)
 		}
 		i++;
 	}
+}
+
+void	replace_num2(t_data *data, int *arr)
+{
+	t_list	*tmp;
+	int	i;
+
 	tmp = data->stkA.lst;
 	while (tmp)
 	{
@@ -151,13 +155,30 @@ void	replace_num(t_data *data)
 				*(int *)tmp->content = i;
 				break;
 			}
-			//printf("%d %d\n", arr[i], i);
 			i++;
 		}
 		tmp = tmp->next;
 	}
-	//show_stack(&data->stkA);
 	free(arr);
+}
+
+void	replace_num(t_data *data)
+{
+	t_list	*tmp;
+	int	*arr;
+	int	i;
+
+	arr = mymalloc(sizeof(int) * (data->alen));
+	tmp = data->stkA.lst;
+	i = 0;
+	while (tmp)
+	{
+		arr[i] = *(int *)tmp->content;
+		tmp = tmp->next;
+		i++;
+	}
+	replace_num1(data, arr);
+	replace_num2(data, arr);
 }
 
 void	parsing(int argc, char *argv[], t_data *data)
@@ -176,12 +197,6 @@ void	parsing(int argc, char *argv[], t_data *data)
 	check_args(argc, argv);
 	add_num(argc, argv, data);
 	replace_num(data);
-	check_unique_num(data); // this breaks if  0 < alen < 2
-	if (check_sorted(data) == 0)
-	{
-		// erase
-		debug("its already sorted\n");
-		free_stack(data);
-		exit(0);
-	}
+	check_unique_num(data);
+	check_sorted(data);
 }

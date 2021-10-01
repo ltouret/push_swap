@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:49:33 by ltouret           #+#    #+#             */
-/*   Updated: 2021/09/30 16:02:42 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:15:31 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,14 @@ static int	check_sorted(t_data *data)
 	return (0);
 }
 
+//void	replace_num1(t_data *data)
+
 void	replace_num(t_data *data)
 {
 	int	*arr;
 	int	i;
+	int	o;
+	int	itmp;
 	t_list	*tmp;
 
 	arr = mymalloc(sizeof(int) * (data->alen));
@@ -117,9 +121,43 @@ void	replace_num(t_data *data)
 	{
 		arr[i] = *(int *)tmp->content;
 		tmp = tmp->next;
-		//printf("%d\n", arr[i]);
 		i++;
 	}
+	i = 0;
+	itmp = 0;
+	while (i < data->alen)
+	{
+		o = i;
+		while (o < data->alen)
+		{
+			if (arr[i] > arr[o])
+			{
+				itmp = arr[o];
+				arr[o] = arr[i];
+				arr[i] = itmp;
+			}
+			o++;
+		}
+		i++;
+	}
+	tmp = data->stkA.lst;
+	while (tmp)
+	{
+		i = 0;
+		while (i < data->alen)
+		{
+			if (*(int *)tmp->content == arr[i])
+			{
+				*(int *)tmp->content = i;
+				break;
+			}
+			//printf("%d %d\n", arr[i], i);
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	//show_stack(&data->stkA);
+	free(arr);
 }
 
 void	parsing(int argc, char *argv[], t_data *data)

@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 10:43:30 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 16:59:23 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 18:42:16 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (i);
 }
 
-static char	**if_err(char **arr)
+char	**if_err(char **arr)
 {
 	int		i;
 
@@ -94,6 +94,8 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	arr = mymalloc(sizeof(char *) * (str_count(s, c) + 1));
+	if (!arr)
+		return (NULL);
 	while (str_count(s, c) > ++i)
 	{
 		while (s[o] == c && s[o])
@@ -106,6 +108,5 @@ char	**ft_split(char const *s, char c)
 			return (if_err(arr));
 		ft_strlcpy(arr[i], s + sta, (o - sta) + 1);
 	}
-	arr[i] = NULL;
 	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 15:49:34 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 16:58:58 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 19:10:17 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_data
 	long			alen;
 }					t_data;
 
+// init
+void	init(char *argv[], t_data *data);
 // exits
 void	panic(void);
 void	free_stack(t_data *data);
@@ -48,11 +50,13 @@ void	*mymalloc(size_t size);
 void	ft_bzero(void *s, size_t n);
 long	ft_atol(const char *str);
 char	**ft_split(const char *s, char c);
+char	**if_err(char **arr);
 // lst
 t_list	*lst_new(void *content);
 t_list	*lst_pop(t_list **lst);
 void	lst_add_back(t_list **lst, t_list *new);
 // parsing
+char	*create_arr(int argc, char *argv[]);
 void	replace_num(t_data *data);
 void	parsing(int argc, char *argv[], t_data *data);
 // erase

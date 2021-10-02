@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:49:33 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 17:00:28 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 19:10:27 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,105 +15,42 @@
 #define MAX 2147483647
 #define MIN -2147483648
 
-void	check_args_space(int argc, char *argv[])
-{
-	(void) argc;
-	(void) argv;
-	int	i;
-	int	o;
-	char	**arr;
-	(void) i;
-	(void) o;
-
-	i = 0;
-	o = 1;
-	while (o < argc)
-	{
-		arr = ft_split(argv[o], ' ');
-		i = 0;
-		while (arr[i] != NULL)
-		{
-			printf("%s\n", arr[i]);
-			i++;
-		}
-		i = 0;
-		while (arr[i] != NULL)
-		{
-			free(arr[i]);
-			i++;
-		}
-		free(arr);
-		o++;
-	}
-	/*
-	i = 0;
-	while (++i < argc)
-	{
-		o = 0;
-		if (argv[i] != NULL && argv[i][o] == '\0')
-			panic();
-		while (argv[i][o] && argv[i][o] == ' ')
-			o++;
-		if (argv[i][o] && (argv[i][o] == '-' || argv[i][o] == '+'))
-		{
-			o++;
-			if (argv[i][o] && !(argv[i][o] >= '0' && argv[i][o] <= '9'))
-				panic();
-		}
-		while (argv[i][o] && argv[i][o] >= '0' && argv[i][o] <= '9')
-			o++;
-		while (argv[i][o] && argv[i][o] == ' ')
-			o++;
-		//if (argv[i][o] != '\0')
-		//	panic();
-	}
-	*/
-}
-
-static void	check_args(int argc, char *argv[])
-// TODO add spaces? "1 3 4 32" gives errpr and it shouldnt
+static void	check_args(char *argv[])
 {
 	int	i;
 	int	o;
 
-	i = 1;
-	(void) argc;
-	(void) argv;
-	(void) i;
-	(void) o;
-	check_args_space(argc, argv);
-	/*
-	while (i < argc)
+	i = 0;
+	while (argv[i] != NULL)
 	{
 		o = 0;
 		if (argv[i] != NULL && argv[i][o] == '\0')
 			panic();
-		//while (argv[i][o] && argv[i][o] == ' ')
-		//	o++;
 		if (argv[i][o] && (argv[i][o] == '-' || argv[i][o] == '+'))
 			o++;
 		while (argv[i][o] && argv[i][o] >= '0' && argv[i][o] <= '9')
 			o++;
-		//while (argv[i][o] && argv[i][o] == ' ')
-		//	o++;
 		if (argv[i][o] != '\0')
+		{
+			if_err(argv);
 			panic();
+		}
 		i++;
 	}
-	*/
 }
 
-static void	add_num(int argc, char *argv[], t_data *data)
+static void	add_num(char *argv[], t_data *data)
 {
 	int		i;
 	int		*r;
 	t_list	*new;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (argv[i] != NULL)
 	{
 		if (ft_atol(argv[i]) > MAX || ft_atol(argv[i]) < MIN)
 		{
+			if_err(argv);
 			free_stack(data);
 			panic();
 		}
@@ -123,6 +60,10 @@ static void	add_num(int argc, char *argv[], t_data *data)
 		lst_add_back(&data->stkA.lst, new);
 		i++;
 	}
+	i = -1;
+	while (argv[++i] != NULL)
+		free(argv[i]);
+	free(argv);
 }
 
 static void	check_unique_num(t_data *data)
@@ -168,10 +109,21 @@ static void	check_sorted(t_data *data)
 
 void	parsing(int argc, char *argv[], t_data *data)
 {
+	char	**arr;
+	char	*nargv;
+
 	if (argc < 2)
 		exit (0);
-	check_args(argc, argv);
-	add_num(argc, argv, data);
+	nargv = create_arr(argc, argv);
+	arr = ft_split(nargv, ' ');
+	free(nargv);
+	if (!arr)
+		panic();
+
+
+	init(arr, data);
+	check_args(arr);
+	add_num(arr, data);
 	replace_num(data);
 	check_unique_num(data);
 	check_sorted(data);

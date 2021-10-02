@@ -6,14 +6,14 @@
 #    By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:00:20 by ltouret           #+#    #+#              #
-#    Updated: 2021/10/02 16:57:50 by ltouret          ###   ########.fr        #
+#    Updated: 2021/10/02 19:08:49 by ltouret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 SRCS = srcs/main.c srcs/utils.c srcs/exit.c srcs/lst_func.c \
-	srcs/parsing.c srcs/replace_num.c \
+	srcs/parsing.c srcs/replace_num.c srcs/create_arr.c \
 	srcs/operations1.c srcs/operations2.c \
 	srcs/sort.c srcs/sort_utils.c \
 	srcs/ft_split.c \

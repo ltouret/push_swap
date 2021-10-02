@@ -21,10 +21,10 @@ void	init(char *argv[], t_data *data)
 	while (argv[i])
 		i++;
 	data->alen = i;
-	data->stkA.rlen = i;
-	data->stkB.rlen = 0;
-	data->stkA.id = 'a';
-	data->stkB.id = 'b';
+	data->stk_a.rlen = i;
+	data->stk_b.rlen = 0;
+	data->stk_a.id = 'a';
+	data->stk_b.id = 'b';
 }
 
 int	main(int argc, char *argv[])

@@ -41,18 +41,18 @@ void	push_small(t_data *data)
 	int	i;
 	int	len;
 
-	i = get_small(data->stkA);
-	len = data->stkA.rlen;
+	i = get_small(data->stk_a);
+	len = data->stk_a.rlen;
 	if (i == 1)
-		swap(&data->stkA, PRINT);
+		swap(&data->stk_a, PRINT);
 	else if (i == 2)
 	{
-		rev_rotate(&data->stkA, PRINT);
-		rev_rotate(&data->stkA, PRINT);
+		rev_rotate(&data->stk_a, PRINT);
+		rev_rotate(&data->stk_a, PRINT);
 	}
 	else if (i == 3)
-		rev_rotate(&data->stkA, PRINT);
+		rev_rotate(&data->stk_a, PRINT);
 	if (len == 5 && (i >= 2 && i <= 4))
-		rev_rotate(&data->stkA, PRINT);
-	push(&data->stkB, &data->stkA);
+		rev_rotate(&data->stk_a, PRINT);
+	push(&data->stk_b, &data->stk_a);
 }

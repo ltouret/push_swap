@@ -17,10 +17,10 @@ static void	sort_two(t_data *data)
 	int	a;
 	int	b;
 
-	b = *(int *)data->stkA.lst->content;
-	a = *(int *)data->stkA.lst->next->content;
+	b = *(int *)data->stk_a.lst->content;
+	a = *(int *)data->stk_a.lst->next->content;
 	if (a < b)
-		swap(&data->stkA, PRINT);
+		swap(&data->stk_a, PRINT);
 }
 
 static void	sort_three(t_data *data)
@@ -29,24 +29,24 @@ static void	sort_three(t_data *data)
 	int	b;
 	int	c;
 
-	c = *(int *)data->stkA.lst->content;
-	b = *(int *)data->stkA.lst->next->content;
-	a = *(int *)data->stkA.lst->next->next->content;
+	c = *(int *)data->stk_a.lst->content;
+	b = *(int *)data->stk_a.lst->next->content;
+	a = *(int *)data->stk_a.lst->next->next->content;
 	if (a > b && b < c && c > a)
-		rotate(&data->stkA, PRINT);
+		rotate(&data->stk_a, PRINT);
 	if (a < b && b < c && c > a)
 	{
-		rotate(&data->stkA, PRINT);
-		swap(&data->stkA, PRINT);
+		rotate(&data->stk_a, PRINT);
+		swap(&data->stk_a, PRINT);
 	}
 	if (a > b && b < c && c < a)
-		swap(&data->stkA, PRINT);
+		swap(&data->stk_a, PRINT);
 	if (a < b && b > c && c > a)
-		rev_rotate(&data->stkA, PRINT);
+		rev_rotate(&data->stk_a, PRINT);
 	if (a < b && b > c && c < a)
 	{
-		rev_rotate(&data->stkA, PRINT);
-		swap(&data->stkA, PRINT);
+		rev_rotate(&data->stk_a, PRINT);
+		swap(&data->stk_a, PRINT);
 	}
 }
 
@@ -56,8 +56,8 @@ static void	sort_five(t_data *data)
 		push_small(data);
 	push_small(data);
 	sort_three(data);
-	push(&data->stkA, &data->stkB);
-	push(&data->stkA, &data->stkB);
+	push(&data->stk_a, &data->stk_b);
+	push(&data->stk_a, &data->stk_b);
 }
 
 static void	sort_big(t_data *data)
@@ -72,15 +72,15 @@ static void	sort_big(t_data *data)
 		o = 0;
 		while (o < data->alen)
 		{
-			num = *(int *)data->stkA.lst->content;
+			num = *(int *)data->stk_a.lst->content;
 			if (((num >> bit_len) & 1) == 1)
-				rotate(&data->stkA, PRINT);
+				rotate(&data->stk_a, PRINT);
 			else
-				push(&data->stkB, &data->stkA);
+				push(&data->stk_b, &data->stk_a);
 			o++;
 		}
-		while (data->stkB.rlen)
-			push(&data->stkA, &data->stkB);
+		while (data->stk_b.rlen)
+			push(&data->stk_a, &data->stk_b);
 		bit_len++;
 	}
 }

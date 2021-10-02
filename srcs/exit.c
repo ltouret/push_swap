@@ -23,7 +23,7 @@ void	free_stack(t_data *data)
 	t_list	*erase;
 	t_list	*next;
 
-	next = data->stkA.lst;
+	next = data->stk_a.lst;
 	while (next)
 	{
 		erase = next;
@@ -31,7 +31,7 @@ void	free_stack(t_data *data)
 		next = next->next;
 		free(erase);
 	}
-	next = data->stkB.lst;
+	next = data->stk_b.lst;
 	while (next)
 	{
 		erase = next;

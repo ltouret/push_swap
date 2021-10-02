@@ -17,7 +17,7 @@ static void	replace_num2(t_data *data, int *arr)
 	t_list	*tmp;
 	int		i;
 
-	tmp = data->stkA.lst;
+	tmp = data->stk_a.lst;
 	while (tmp)
 	{
 		i = 0;
@@ -67,7 +67,7 @@ void	replace_num(t_data *data)
 	int		i;
 
 	arr = mymalloc(sizeof(int) * (data->alen));
-	tmp = data->stkA.lst;
+	tmp = data->stk_a.lst;
 	i = 0;
 	while (tmp)
 	{

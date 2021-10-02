@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 15:49:34 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 19:22:10 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 19:35:35 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct s_stack
 
 typedef struct s_data
 {
-	t_stack			stkA;
-	t_stack			stkB;
+	t_stack			stk_a;
+	t_stack			stk_b;
 	long			alen;
 }					t_data;
 
@@ -71,7 +71,7 @@ void	rrotate(t_stack *stack_a, t_stack *stack_b);
 void	rev_rotate(t_stack *stack, int print);
 void	rrev_rotate(t_stack *stack_a, t_stack *stack_b);
 // sort
-int	get_small(t_stack stk);
+int		get_small(t_stack stk);
 void	push_small(t_data *data);
 void	sort(t_data *data);
 

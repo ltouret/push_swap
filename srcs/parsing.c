@@ -57,7 +57,7 @@ static void	add_num(char *argv[], t_data *data)
 		r = mymalloc(sizeof(int));
 		*r = ft_atol(argv[i]);
 		new = lst_new(r);
-		lst_add_back(&data->stkA.lst, new);
+		lst_add_back(&data->stk_a.lst, new);
 		i++;
 	}
 	i = -1;
@@ -71,7 +71,7 @@ static void	check_unique_num(t_data *data)
 	t_list	*i;
 	t_list	*o;
 
-	i = data->stkA.lst;
+	i = data->stk_a.lst;
 	while (i)
 	{
 		o = i->next;
@@ -93,7 +93,7 @@ static void	check_sorted(t_data *data)
 	t_list	*current;
 	t_list	*current_p;
 
-	current = data->stkA.lst;
+	current = data->stk_a.lst;
 	current_p = current->next;
 	while (current_p)
 	{

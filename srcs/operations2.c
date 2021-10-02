@@ -1,7 +1,5 @@
 #include "push_swap.h"
 
-//operations coding
-
 void	rev_rotate(t_stack *stack, int print)
 {
 	t_list	*newfirst;
@@ -11,8 +9,7 @@ void	rev_rotate(t_stack *stack, int print)
 	newfirst = lst_pop(&stack->lst);
 	newfirst->next = stack->lst;
 	stack->lst = newfirst;
-	//printf("%d\n", *(int *)newfirst->content);
-	if (print == 0)
+	if (print == HIDE)
 		return ;
 	write(1, "rr", 2);
 	write(1, &stack->id, 1);
@@ -20,7 +17,6 @@ void	rev_rotate(t_stack *stack, int print)
 }
 
 void	rrev_rotate(t_stack *stack_a, t_stack *stack_b)
-// If theres only in one stack should you stop
 {
 	rev_rotate(stack_a, 0);
 	rev_rotate(stack_b, 0);

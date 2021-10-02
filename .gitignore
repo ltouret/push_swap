@@ -3,6 +3,7 @@
 *.png
 *.html
 *.pdf
+*.sh
 checker_linux
 push_swap
 

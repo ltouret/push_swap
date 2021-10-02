@@ -6,11 +6,11 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:49:33 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 19:26:32 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 20:54:12 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 #define MAX 2147483647
 #define MIN -2147483648
@@ -88,25 +88,6 @@ static void	check_unique_num(t_data *data)
 	}
 }
 
-static void	check_sorted(t_data *data)
-{
-	t_list	*current;
-	t_list	*current_p;
-
-	current = data->stk_a.lst;
-	current_p = current->next;
-	while (current_p)
-	{
-		if (*(int *)current_p->content < *(int *)current->content)
-			return ;
-		current_p = current_p->next;
-		current = current->next;
-	}
-	free_stack(data);
-	exit(0);
-	return ;
-}
-
 void	parsing(int argc, char *argv[], t_data *data)
 {
 	char	**arr;
@@ -121,5 +102,4 @@ void	parsing(int argc, char *argv[], t_data *data)
 	add_num(arr, data);
 	replace_num(data);
 	check_unique_num(data);
-	check_sorted(data);
 }

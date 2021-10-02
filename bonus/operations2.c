@@ -6,11 +6,11 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 19:27:20 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 19:27:21 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 22:49:31 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	rev_rotate(t_stack *stack, int print)
 {
@@ -32,5 +32,4 @@ void	rrev_rotate(t_stack *stack_a, t_stack *stack_b)
 {
 	rev_rotate(stack_a, 0);
 	rev_rotate(stack_b, 0);
-	write(1, "rrr\n", 4);
 }

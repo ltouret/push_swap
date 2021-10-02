@@ -6,13 +6,13 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 10:43:30 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 18:42:16 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 21:11:03 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-static int	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	unsigned int	i;
 

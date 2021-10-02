@@ -6,11 +6,11 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 19:27:31 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 19:28:01 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 22:58:45 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	panic(void)
 {

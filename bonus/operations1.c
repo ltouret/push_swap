@@ -6,11 +6,11 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 19:31:17 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 19:31:18 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 22:45:45 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	swap(t_stack *stack, int print)
 {
@@ -34,7 +34,6 @@ void	sswap(t_stack *stack_a, t_stack *stack_b)
 {
 	swap(stack_a, 0);
 	swap(stack_b, 0);
-	write(1, "ss\n", 3);
 }
 
 void	push(t_stack *dest, t_stack *src)
@@ -49,9 +48,6 @@ void	push(t_stack *dest, t_stack *src)
 	dest->lst = tmp;
 	dest->rlen++;
 	src->rlen--;
-	write(1, "p", 1);
-	write(1, &dest->id, 1);
-	write(1, "\n", 1);
 }
 
 void	rotate(t_stack *stack, int print)
@@ -79,5 +75,4 @@ void	rrotate(t_stack *stack_a, t_stack *stack_b)
 {
 	rotate(stack_a, 0);
 	rotate(stack_b, 0);
-	write(1, "rr\n", 3);
 }

@@ -5,6 +5,7 @@
 *.pdf
 *.sh
 checker_linux
+checker
 push_swap
 
 # Prerequisites

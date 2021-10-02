@@ -6,11 +6,13 @@
 #    By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:00:20 by ltouret           #+#    #+#              #
-#    Updated: 2021/10/02 19:08:49 by ltouret          ###   ########.fr        #
+#    Updated: 2021/10/02 20:15:14 by ltouret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+
+NAME2 = checker
 
 SRCS = srcs/main.c srcs/utils.c srcs/exit.c srcs/lst_func.c \
 	srcs/parsing.c srcs/replace_num.c srcs/create_arr.c \
@@ -19,7 +21,11 @@ SRCS = srcs/main.c srcs/utils.c srcs/exit.c srcs/lst_func.c \
 	srcs/ft_split.c \
 	srcs/erase.c  #TODO erase 
 
+BONUS = bonus/main.c
+
 OBJS = ${SRCS:.c=.o}
+
+OBJSBONUS = ${BONUS:.c=.o} 
 
 CC		= clang
 RM		= rm -f
@@ -34,17 +40,21 @@ FSAN = -fsanitize=address
 $(NAME): ${OBJS}
 		${CC} ${OBJS} -o ${NAME} 
 
+bonus: ${OBJS} ${OBJSBONUS}
+		${CC} ${OBJS} -o ${NAME} 
+		${CC} ${OBJSBONUS} -o ${NAME2} 
+
 all:	${NAME}
 
 clean:
-		${RM} ${OBJS}
+		${RM} ${OBJS} ${OBJSBONUS}
 
 fclean:	clean
-		${RM} ${NAME}
+		${RM} ${NAME} ${NAME2}
 
 re:		fclean all
 
-test:	all
+test:	bonus
 		@#./push_swap 7 6 3 4 -19 2 123
 		@#./push_swap 3 2 5 1
 		@#./push_swap 3 2 1 5 7
@@ -52,4 +62,4 @@ test:	all
 		./push_swap "    87  -487  781      -100  101  0  1"
 		@#./push_swap +171 -13 148 #this breaks!
 
-.PHONY: all clean fclean re test
+.PHONY: bonus all clean fclean re test

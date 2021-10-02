@@ -6,7 +6,7 @@
 #    By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:00:20 by ltouret           #+#    #+#              #
-#    Updated: 2021/10/02 21:11:22 by ltouret          ###   ########.fr        #
+#    Updated: 2021/10/02 23:15:49 by ltouret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS = srcs/main.c srcs/utils.c srcs/exit.c srcs/lst_func.c \
 BONUS = bonus/main.c bonus/utils.c bonus/exit.c bonus/lst_func.c \
 	bonus/parsing.c bonus/replace_num.c bonus/create_arr.c \
 	bonus/operations1.c bonus/operations2.c \
+	bonus/gnl/get_next_line.c bonus/gnl/get_next_line_utils.c \
 	bonus/ft_split.c bonus/ft_strcmp.c
 
 OBJS = ${SRCS:.c=.o}

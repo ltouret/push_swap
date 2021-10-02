@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 15:49:34 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 21:14:29 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 23:16:15 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "gnl/get_next_line.h"
 
 # define HIDE 0
 # define PRINT 1
@@ -51,7 +52,6 @@ void	ft_bzero(void *s, size_t n);
 long	ft_atol(const char *str);
 char	**ft_split(const char *s, char c);
 char	**if_err(char **arr);
-int		ft_strlen(const char *s1);
 int		ft_strcmp(const char *s1, const char *s2);
 // lst
 t_list	*lst_new(void *content);

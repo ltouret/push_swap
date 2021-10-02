@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 12:03:34 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 23:05:03 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 23:11:14 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,9 @@ void	check_sorted(t_data *data)
 	t_list	*current_p;
 
 	current = data->stk_a.lst;
-	if (current == NULL)
-	{
-		//current_p = NULL;
-		write(1, "KO\n", 3);
-		return ;
-	}
-	current_p = current->next;
-	//write(1, "KK\n", 3);
+	current_p = NULL;
+	if (current != NULL)
+		current_p = current->next;
 	while (current_p)
 	{
 		if (*(int *)current_p->content < *(int *)current->content)
@@ -101,8 +96,8 @@ void	compare_buf(t_data *data, char *buf)
 		write(2, "Error\n", 6);
 		exit(1);
 	}
-	show_stack(&data->stk_a);
-	show_stack(&data->stk_b);
+	//show_stack(&data->stk_a);
+	//show_stack(&data->stk_b);
 }
 
 void	read_input(t_data *data)
@@ -115,6 +110,7 @@ void	read_input(t_data *data)
 	{
 		ft_bzero(&buf, sizeof(char) * 10);
 		eof = read(0, buf, 10);
+		printf("%s\n", buf);
 		if (eof != 0)
 			compare_buf(data, buf);
 	}

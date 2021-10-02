@@ -6,21 +6,11 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 10:43:30 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 21:11:03 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 23:17:12 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
-
-int	ft_strlen(const char *s)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 static size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
@@ -65,7 +55,7 @@ static int	str_count(char const *s, char c)
 	int		count;
 
 	sta = 0;
-	end = ft_strlen(s);
+	end = ft_strlen((char *)s);
 	count = 0;
 	while (s[sta] == c && s[sta])
 		sta++;

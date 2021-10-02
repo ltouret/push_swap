@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 12:03:34 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 23:11:14 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/03 00:58:01 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	compare_buf(t_data *data, char *buf)
 	else
 	{
 		write(2, "Error\n", 6);
+		free_stack(data);
+		free(buf);
 		exit(1);
 	}
 	//show_stack(&data->stk_a);
@@ -102,17 +104,15 @@ void	compare_buf(t_data *data, char *buf)
 
 void	read_input(t_data *data)
 {
-	char	buf[10];
-	int		eof;
+	char	*buf;
 
-	eof = 1;
-	while (eof)
+	buf = get_next_line(0);
+	while (buf != NULL)
 	{
-		ft_bzero(&buf, sizeof(char) * 10);
-		eof = read(0, buf, 10);
-		printf("%s\n", buf);
-		if (eof != 0)
+		if (buf != NULL)
 			compare_buf(data, buf);
+		free(buf);
+		buf = get_next_line(0);
 	}
 }
 

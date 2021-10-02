@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 23:25:39 by ltouret           #+#    #+#             */
-/*   Updated: 2021/09/07 18:57:33 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 23:49:24 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	*after_nl(char *line, int nl)
 }
 
 // add outstr = ft_substr(*line, 0, nl + 1); if u want nl included
-// line 93
+// line 90
 
 static char	*read_file(char **line, int fd, char *buf)
 {
@@ -87,7 +87,7 @@ static char	*read_file(char **line, int fd, char *buf)
 		}
 		nl = find_nl(*line);
 	}
-	outstr = ft_substr(*line, 0, nl);
+	outstr = ft_substr(*line, 0, nl + 1);
 	*line = after_nl(*line, nl);
 	return (outstr);
 }

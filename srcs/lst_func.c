@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_func.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/02 19:30:18 by ltouret           #+#    #+#             */
+/*   Updated: 2021/10/02 19:30:54 by ltouret          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_list	*lst_new(void *content)
@@ -11,7 +23,6 @@ t_list	*lst_new(void *content)
 }
 
 void	lst_add_back(t_list **lst, t_list *new)
-// should add exit if lst is null?
 {
 	t_list	*current;
 
@@ -23,14 +34,12 @@ void	lst_add_back(t_list **lst, t_list *new)
 		return ;
 	}
 	current = *lst;
-	while(current->next)
+	while (current->next)
 		current = current->next;
 	current->next = new;
 }
 
 t_list	*lst_pop(t_list **lst)
-// return content most likely!
-// test this more...
 {
 	int		i;
 	t_list	*last;
@@ -55,7 +64,5 @@ t_list	*lst_pop(t_list **lst)
 		*lst = NULL;
 	else
 		pen->next = NULL;
-	//printf("%d %d %d\n", *(int *)last->content, *(int *)pen->content, i);
 	return (last);
 }
-

@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:49:33 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 19:10:27 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 19:26:32 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,12 @@ static void	check_sorted(t_data *data)
 void	parsing(int argc, char *argv[], t_data *data)
 {
 	char	**arr;
-	char	*nargv;
 
 	if (argc < 2)
 		exit (0);
-	nargv = create_arr(argc, argv);
-	arr = ft_split(nargv, ' ');
-	free(nargv);
+	arr = create_arr(argc, argv);
 	if (!arr)
 		panic();
-
-
 	init(arr, data);
 	check_args(arr);
 	add_num(arr, data);

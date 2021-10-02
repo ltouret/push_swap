@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 12:03:32 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 18:15:33 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 19:31:33 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	replace_num2(t_data *data, int *arr)
 {
 	t_list	*tmp;
-	int	i;
+	int		i;
 
 	tmp = data->stkA.lst;
 	while (tmp)
@@ -26,7 +26,7 @@ static void	replace_num2(t_data *data, int *arr)
 			if (*(int *)tmp->content == arr[i])
 			{
 				*(int *)tmp->content = i;
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -63,8 +63,8 @@ static void	replace_num1(t_data *data, int *arr)
 void	replace_num(t_data *data)
 {
 	t_list	*tmp;
-	int	*arr;
-	int	i;
+	int		*arr;
+	int		i;
 
 	arr = mymalloc(sizeof(int) * (data->alen));
 	tmp = data->stkA.lst;

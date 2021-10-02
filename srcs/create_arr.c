@@ -6,13 +6,13 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 19:06:52 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 19:07:08 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 19:23:59 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char	*create_arr(int argc, char *argv[])
+static char	*argv_len(int argc, char *argv[])
 {
 	int		i;
 	int		o;
@@ -35,7 +35,19 @@ char	*create_arr(int argc, char *argv[])
 	}
 	arr = mymalloc(sizeof(char) * (c + 1 + argc - 1));
 	if (!arr)
-		return (NULL);
+		panic();
+	return (arr);
+}
+
+char	**create_arr(int argc, char *argv[])
+{
+	int		i;
+	int		o;
+	int		c;
+	char	*nargv;
+	char	**arr;
+
+	nargv = argv_len(argc, argv);
 	i = 1;
 	c = 0;
 	while (i < argc)
@@ -43,13 +55,15 @@ char	*create_arr(int argc, char *argv[])
 		o = 0;
 		while (argv[i][o])
 		{
-			arr[c] = argv[i][o];
+			nargv[c] = argv[i][o];
 			c++;
 			o++;
 		}
-		arr[c] = ' ';
+		nargv[c] = ' ';
 		c++;
 		i++;
 	}
+	arr = ft_split(nargv, ' ');
+	free(nargv);
 	return (arr);
 }

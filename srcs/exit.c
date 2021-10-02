@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/02 19:27:31 by ltouret           #+#    #+#             */
+/*   Updated: 2021/10/02 19:28:01 by ltouret          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	panic(void)
@@ -8,29 +20,21 @@ void	panic(void)
 
 void	free_stack(t_data *data)
 {
-	// call this when done too free all!
-	// TODO add NULLs so no double free :D
-	// should call exit here by default?
-	t_list *erase;
-	t_list *next;
+	t_list	*erase;
+	t_list	*next;
 
 	next = data->stkA.lst;
 	while (next)
 	{
 		erase = next;
-		//printf("%d\n", *(int *)next->content);
 		free(erase->content);
-		//erase->content = NULL;
 		next = next->next;
 		free(erase);
-		//erase = NULL;
 	}
 	next = data->stkB.lst;
 	while (next)
 	{
 		erase = next;
-		//printf("%d\n", *(int *)next->content);
-		//debug("X"); // pop prob even does stuff here why ?
 		free(erase->content);
 		next = next->next;
 		free(erase);

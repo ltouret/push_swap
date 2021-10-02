@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 12:00:56 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 13:39:26 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 19:29:58 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,3 @@ void	push_small(t_data *data)
 		rev_rotate(&data->stkA, PRINT);
 	push(&data->stkB, &data->stkA);
 }
-

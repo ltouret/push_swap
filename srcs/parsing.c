@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:49:33 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 12:08:01 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/02 17:00:28 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,92 @@
 #define MAX 2147483647
 #define MIN -2147483648
 
+void	check_args_space(int argc, char *argv[])
+{
+	(void) argc;
+	(void) argv;
+	int	i;
+	int	o;
+	char	**arr;
+	(void) i;
+	(void) o;
+
+	i = 0;
+	o = 1;
+	while (o < argc)
+	{
+		arr = ft_split(argv[o], ' ');
+		i = 0;
+		while (arr[i] != NULL)
+		{
+			printf("%s\n", arr[i]);
+			i++;
+		}
+		i = 0;
+		while (arr[i] != NULL)
+		{
+			free(arr[i]);
+			i++;
+		}
+		free(arr);
+		o++;
+	}
+	/*
+	i = 0;
+	while (++i < argc)
+	{
+		o = 0;
+		if (argv[i] != NULL && argv[i][o] == '\0')
+			panic();
+		while (argv[i][o] && argv[i][o] == ' ')
+			o++;
+		if (argv[i][o] && (argv[i][o] == '-' || argv[i][o] == '+'))
+		{
+			o++;
+			if (argv[i][o] && !(argv[i][o] >= '0' && argv[i][o] <= '9'))
+				panic();
+		}
+		while (argv[i][o] && argv[i][o] >= '0' && argv[i][o] <= '9')
+			o++;
+		while (argv[i][o] && argv[i][o] == ' ')
+			o++;
+		//if (argv[i][o] != '\0')
+		//	panic();
+	}
+	*/
+}
+
 static void	check_args(int argc, char *argv[])
 // TODO add spaces? "1 3 4 32" gives errpr and it shouldnt
 {
 	int	i;
 	int	o;
-	int	sign;
 
-	i = 0;
-	while (++i < argc)
+	i = 1;
+	(void) argc;
+	(void) argv;
+	(void) i;
+	(void) o;
+	check_args_space(argc, argv);
+	/*
+	while (i < argc)
 	{
 		o = 0;
-		sign = 0;
 		if (argv[i] != NULL && argv[i][o] == '\0')
 			panic();
-		while (argv[i][o] && (argv[i][o] == '-' || argv[i][o] == '+'))
-		{
-			sign++;
+		//while (argv[i][o] && argv[i][o] == ' ')
+		//	o++;
+		if (argv[i][o] && (argv[i][o] == '-' || argv[i][o] == '+'))
 			o++;
-		}
 		while (argv[i][o] && argv[i][o] >= '0' && argv[i][o] <= '9')
 			o++;
-		if (argv[i][o] != '\0' || sign > 1)
+		//while (argv[i][o] && argv[i][o] == ' ')
+		//	o++;
+		if (argv[i][o] != '\0')
 			panic();
+		i++;
 	}
+	*/
 }
 
 static void	add_num(int argc, char *argv[], t_data *data)

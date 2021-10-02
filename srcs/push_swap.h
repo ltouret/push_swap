@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/02 15:49:34 by ltouret           #+#    #+#             */
+/*   Updated: 2021/10/02 16:58:58 by ltouret          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -35,10 +47,11 @@ void	free_stack(t_data *data);
 void	*mymalloc(size_t size);
 void	ft_bzero(void *s, size_t n);
 long	ft_atol(const char *str);
+char	**ft_split(const char *s, char c);
 // lst
 t_list	*lst_new(void *content);
-void	lst_add_back(t_list **lst, t_list *new);
 t_list	*lst_pop(t_list **lst);
+void	lst_add_back(t_list **lst, t_list *new);
 // parsing
 void	replace_num(t_data *data);
 void	parsing(int argc, char *argv[], t_data *data);

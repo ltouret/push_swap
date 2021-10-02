@@ -6,7 +6,7 @@
 #    By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:00:20 by ltouret           #+#    #+#              #
-#    Updated: 2021/10/02 12:22:56 by ltouret          ###   ########.fr        #
+#    Updated: 2021/10/02 16:57:50 by ltouret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS = srcs/main.c srcs/utils.c srcs/exit.c srcs/lst_func.c \
 	srcs/parsing.c srcs/replace_num.c \
 	srcs/operations1.c srcs/operations2.c \
 	srcs/sort.c srcs/sort_utils.c \
-	srcs/erase.c #TODO erase
+	srcs/ft_split.c \
+	srcs/erase.c  #TODO erase 
 
 OBJS = ${SRCS:.c=.o}
 
@@ -48,7 +49,7 @@ test:	all
 		@#./push_swap 3 2 5 1
 		@#./push_swap 3 2 1 5 7
 		@#./push_swap 7 6
-		./push_swap "87  -487  781      -100  101  0  1"
+		./push_swap "    87  -487  781      -100  101  0  1"
 		@#./push_swap +171 -13 148 #this breaks!
 
 .PHONY: all clean fclean re test

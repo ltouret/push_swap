@@ -6,7 +6,7 @@
 /*   By: ltouret <ltouret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 15:49:34 by ltouret           #+#    #+#             */
-/*   Updated: 2021/10/02 19:35:35 by ltouret          ###   ########.fr       */
+/*   Updated: 2021/10/03 01:06:22 by ltouret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ void	lst_add_back(t_list **lst, t_list *new);
 char	**create_arr(int argc, char *argv[]);
 void	replace_num(t_data *data);
 void	parsing(int argc, char *argv[], t_data *data);
-// erase
-void	show_stack(t_stack *stack);
-void	debug(char *str);
 // operations
 void	swap(t_stack *stack, int print);
 void	sswap(t_stack *stack_a, t_stack *stack_b);
